@@ -1,6 +1,6 @@
 import { AnyAction, PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { addDebtor, changeDebtorStatus, fetchAllDebtors } from './thunks';
+import { addDebtor, fetchAllDebtors, updateDebtor } from './thunks';
 
 import type { IDebtor } from 'shared/api';
 
@@ -38,11 +38,11 @@ const debtorSlice = createSlice({
         state.data.push(action.payload);
         state.loading = false;
       })
-      .addCase(changeDebtorStatus.pending, (state) => {
+      .addCase(updateDebtor.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
-      .addCase(changeDebtorStatus.fulfilled, (state, action) => {
+      .addCase(updateDebtor.fulfilled, (state, action) => {
         state.data = state.data.map((debtor) =>
           debtor._id === action.payload._id ? action.payload : debtor
         );

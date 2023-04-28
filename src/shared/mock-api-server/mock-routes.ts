@@ -20,7 +20,7 @@ export const debtorRoutes = (server: Server) => {
   });
 
   server.put(END_POINT, (_, request: Request) => {
-    const res = db.changeStatus(JSON.parse(request.requestBody));
+    const res = db.update(JSON.parse(request.requestBody));
 
     if (!res) return new Response(404, {}, errorResponse);
 

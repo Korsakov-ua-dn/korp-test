@@ -17,7 +17,6 @@ export const fetchAllDebtors = createAsyncThunk<
   try {
     const response = await debtorAPI.getAll();
 
-    // type guard server responce
     if (!isArray(response.data)) {
       return rejectWithValue('Не корректный ответ сервера');
     }
@@ -55,15 +54,15 @@ export const addDebtor = createAsyncThunk<
 
 /**
  * Thunk
- * @returns Возвращает нового должника или ошибку
+ * @returns Возвращает обновленного должника или ошибку
  */
-export const changeDebtorStatus = createAsyncThunk<
+export const updateDebtor = createAsyncThunk<
   IDebtor,
   IDebtor,
   { rejectValue: string; state: RootState }
 >('debtor/CHANGE_STATUS', async (payload, { rejectWithValue }) => {
   try {
-    const response = await debtorAPI.changeStatus(payload);
+    const response = await debtorAPI.update(payload);
 
     // type guard server responce
     if (!isDebtor(response.data)) {

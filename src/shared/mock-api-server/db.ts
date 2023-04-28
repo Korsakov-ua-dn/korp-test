@@ -3,17 +3,17 @@ import { v1 } from 'uuid';
 import { IDebtor } from 'shared/api';
 
 export const db = {
-  _parse: (debtors: string | null) => {
+  _parse: (debtors: string | null): IDebtor[] => {
     if (!debtors) return [];
     return JSON.parse(debtors);
   },
 
-  get: () => {
+  get: (): IDebtor[] => {
     const debtors = localStorage.getItem('debtors');
     return db._parse(debtors);
   },
 
-  add: (debtor: IDebtor) => {
+  add: (debtor: IDebtor): IDebtor => {
     const debtors = db.get();
     const newDebtor = { ...debtor, _id: v1(), isPaid: false };
     debtors.push(newDebtor);
@@ -22,7 +22,7 @@ export const db = {
     return newDebtor;
   },
 
-  changeStatus: (payload: IDebtor) => {
+  update: (payload: IDebtor): null | IDebtor => {
     const debtors = db.get();
     const target = debtors.findIndex(
       (debtor: IDebtor) => debtor._id === payload._id
@@ -30,13 +30,9 @@ export const db = {
 
     if (target === -1) return null;
 
-    const updatedDebtor = {
-      ...debtors[target],
-      isPaid: !debtors[target].isPaid,
-    };
-    debtors[target] = updatedDebtor;
+    debtors[target] = payload;
     localStorage.setItem('debtors', JSON.stringify(debtors));
 
-    return updatedDebtor;
+    return payload;
   },
 };

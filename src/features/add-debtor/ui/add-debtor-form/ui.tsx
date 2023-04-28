@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useCallback } from 'react';
 import Button from '@mui/material/Button';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -16,7 +16,7 @@ interface IProps {
 
 export const AddDebtorForm: React.FC<IProps> = typedMemo(({ onSubmit }) => {
   const {
-    formState: { errors, isSubmitSuccessful },
+    formState: { errors },
     handleSubmit,
     register,
     reset,
@@ -24,14 +24,16 @@ export const AddDebtorForm: React.FC<IProps> = typedMemo(({ onSubmit }) => {
     resolver: yupResolver(schema),
   });
 
-  useEffect(() => {
-    if (isSubmitSuccessful) {
+  const onSubmitHandler = useCallback(
+    (data: FormData) => {
+      onSubmit(data);
       reset();
-    }
-  }, [isSubmitSuccessful, reset]);
+    },
+    [onSubmit, reset]
+  );
 
   return (
-    <Form onSubmit={handleSubmit(onSubmit)} className="AddDebtorForm">
+    <Form onSubmit={handleSubmit(onSubmitHandler)} className="AddDebtorForm">
       <Input
         {...register('name' as const)}
         error={!!errors['name']}

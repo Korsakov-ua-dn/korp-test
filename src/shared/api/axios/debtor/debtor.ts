@@ -16,6 +16,6 @@ export const add = (payload: Partial<IDebtor>): AxiosPromise<IDebtor> => {
   return axiosInstance.post(END_POINT, payload);
 };
 
-export const changeStatus = (payload: IDebtor): AxiosPromise<IDebtor> => {
+export const update = (payload: IDebtor): AxiosPromise<IDebtor> => {
   return axiosInstance.put(END_POINT, payload);
 };
