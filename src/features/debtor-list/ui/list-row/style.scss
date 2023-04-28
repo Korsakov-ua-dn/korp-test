@@ -1,0 +1,18 @@
+@import 'shared/scss/mixines.scss';
+
+.List__Row {
+  display: grid;
+  grid-template-columns: 68px 1fr 1fr;
+  grid-auto-rows: 40px;
+}
+
+.List__cell {
+  padding: 10px;
+  border-right: 1px solid var(--color_light_grey);
+  border-bottom: 1px solid var(--color_light_grey);
+  @include flexCenter();
+  justify-content: flex-start;
+}
+
+.List__nodata {
+}

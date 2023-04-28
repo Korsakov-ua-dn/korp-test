@@ -1,4 +1,4 @@
-export const debtors = [
+const debtors = [
   {
     _id: 'x78i14-gzidv',
     name: 'Руднев',
@@ -7,12 +7,16 @@ export const debtors = [
   },
 ];
 
-// export const errorResponse = {
-//   "code": 0,
-//   "message": "Ошибка клиента",
-//   "details": [
-//     {
-//       "test": "asdad",
-//     }
-//   ]
-// }
+export function setMockData(): void {
+  localStorage.setItem('debtors', JSON.stringify(debtors));
+}
+
+export const errorResponse = {
+  code: 0,
+  message: 'Ошибка клиента',
+  details: [
+    {
+      test: 'asdad',
+    },
+  ],
+};

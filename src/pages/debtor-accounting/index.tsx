@@ -4,6 +4,9 @@ import { useAppDispatch, useAppSelector } from 'shared/hooks';
 import { Section } from 'shared/ui/section';
 import { Layout } from 'shared/ui/layout';
 import { fetchAllDebtors } from 'entities/debtor';
+import { AddDebtor } from 'features/add-debtor';
+import { DebtorsList } from 'features/debtor-list';
+import { Spinner } from 'shared/ui/spinner';
 
 const DebtorAccounting: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -18,14 +21,6 @@ const DebtorAccounting: React.FC = () => {
     dispatch(fetchAllDebtors());
   }, [dispatch]);
 
-  if (debtor.loading) {
-    return (
-      <Section>
-        <Layout>Загрузка данных о должниках...</Layout>
-      </Section>
-    );
-  }
-
   if (debtor.error) {
     return (
       <Section>
@@ -34,17 +29,15 @@ const DebtorAccounting: React.FC = () => {
     );
   }
 
-  if (!debtor.data.length) {
-    return (
-      <Section>
-        <Layout>Список должников пуст</Layout>
-      </Section>
-    );
-  }
-
   return (
     <Section>
-      <Layout>{debtor.data.map((debtor) => debtor.name)}</Layout>
+      <Layout>
+        <AddDebtor />
+
+        <DebtorsList />
+      </Layout>
+
+      <Spinner loading={debtor.loading} />
     </Section>
   );
 };

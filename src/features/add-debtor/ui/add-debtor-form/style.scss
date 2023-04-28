@@ -1,0 +1,17 @@
+.AddDebtorForm {
+  width: 100%;
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+}
+
+.AddDebtorForm__input {
+  min-width: 320px !important;
+  width: 320px !important;
+  margin-bottom: 15px !important;
+}
+
+.AddDebtorForm__submit {
+  height: 40px;
+  margin-left: auto !important;
+}

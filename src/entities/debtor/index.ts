@@ -1,1 +1,6 @@
-export { debtorReducer, fetchAllDebtors, getAllDebtors } from './model';
+export {
+  debtorReducer,
+  fetchAllDebtors,
+  getAllDebtors,
+  changeDebtorStatus,
+} from './model';

@@ -7,7 +7,7 @@ const Input = forwardRef<HTMLInputElement, TextFieldProps>(
   ({ className, ...rest }: TextFieldProps, ref) => {
     const props = {
       ...rest,
-      className: `Input ${className ? 'Input_' + className : ''}`,
+      className: `Input ${className ? className : ''}`,
     };
 
     return <TextField inputRef={ref} variant="outlined" {...props} />;

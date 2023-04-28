@@ -1,0 +1,9 @@
+@import 'shared/scss/mixines.scss';
+
+.List__nodata {
+  height: 100px;
+  padding: 10px;
+  border-right: 1px solid var(--color_light_grey);
+  border-bottom: 1px solid var(--color_light_grey);
+  @include flexCenter();
+}

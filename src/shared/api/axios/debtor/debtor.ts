@@ -11,3 +11,11 @@ export const getAll = (params?: {
 }): AxiosPromise<IDebtor[]> => {
   return axiosInstance.get(END_POINT, { params });
 };
+
+export const add = (payload: Partial<IDebtor>): AxiosPromise<IDebtor> => {
+  return axiosInstance.post(END_POINT, payload);
+};
+
+export const changeStatus = (payload: IDebtor): AxiosPromise<IDebtor> => {
+  return axiosInstance.put(END_POINT, payload);
+};

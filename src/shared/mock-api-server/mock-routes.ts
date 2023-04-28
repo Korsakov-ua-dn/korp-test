@@ -1,47 +1,29 @@
 import { Request, Response, Server } from 'miragejs';
-// import { v1 } from 'uuid';
 
 import { END_POINT } from 'shared/api';
 
-import { debtors } from './mock-data';
+import { errorResponse } from './mock-data';
+import { db } from './db';
 
 export const debtorRoutes = (server: Server) => {
   server.get(END_POINT, () => {
+    const debtors = db.get();
     return new Response(200, {}, debtors);
-    // return new Response(404, {}, errorResponse);
   });
 
-  // server.post('/api/customers/', (_, request: Request) => {
-  //   const { organization, ...rest } = JSON.parse(request.requestBody);
-  //   const { bank_accounts } = organization;
-  //   const now = new Date(Date.now()).toISOString();
+  server.post(END_POINT, (_, request: Request) => {
+    const res = db.add(JSON.parse(request.requestBody));
 
-  //   const responseBody = {
-  //     id: v1(),
-  //     org: {
-  //       ...organization,
-  //       id: v1(),
-  //       bank_accounts: bank_accounts.map((acc) => ({
-  //         ...acc,
-  //         id: v1(),
-  //         created_at: now,
-  //         updated_at: now,
-  //       })),
-  //       created_at: now,
-  //       updated_at: now,
-  //     },
-  //     balance: {
-  //       currency: 'RUB',
-  //       current_amount: 0,
-  //       credit_limit: 0,
-  //       available_amount: 0,
-  //     },
-  //     created_at: now,
-  //     updated_at: now,
-  //     status: 'active',
-  //     ...rest,
-  //   };
+    if (!res) return new Response(404, {}, errorResponse);
 
-  //   return new Response(200, {}, responseBody);
-  // });
+    return new Response(200, {}, res);
+  });
+
+  server.put(END_POINT, (_, request: Request) => {
+    const res = db.changeStatus(JSON.parse(request.requestBody));
+
+    if (!res) return new Response(404, {}, errorResponse);
+
+    return new Response(200, {}, res);
+  });
 };
