@@ -1,6 +1,7 @@
 import { typedMemo } from 'shared/hocs';
 
 import type { IDebtor } from 'shared/api';
+
 import './style.scss';
 
 interface IProps {

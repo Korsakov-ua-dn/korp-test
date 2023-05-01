@@ -1,22 +1,12 @@
-import { typedMemo } from 'shared/hocs';
-
 import './style.scss';
 
-interface IProps {
-  children: React.ReactNode;
-  className?: string;
-  onSubmit: (e?: React.FormEvent<HTMLFormElement> | undefined) => void;
-}
+type Props = JSX.IntrinsicElements['form'];
 
-export const Form: React.FC<IProps> = typedMemo(
-  ({ children, className, onSubmit }) => {
-    return (
-      <form
-        className={`Form ${className ? className : ''}`}
-        onSubmit={onSubmit}
-      >
-        {children}
-      </form>
-    );
-  }
-);
+export const Form: React.FC<Props> = ({ className, ...restProps }) => {
+  const props = {
+    ...restProps,
+    className: `Form ${className ? className : ''}`,
+  };
+
+  return <form {...props} />;
+};

@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import { typedMemo } from 'shared/hocs';
 import { useAppDispatch } from 'shared/hooks';
-import { addDebtor } from 'entities/debtor/model/thunks';
+import { addDebtor } from 'entities/debtor';
 
 import { AddDebtorForm, FormData } from './add-debtor-form';
 

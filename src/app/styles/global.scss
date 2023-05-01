@@ -9,15 +9,6 @@ body {
   font-size: 14px;
   color: var(--font_color);
   background-color: var(--background);
-
-  // скрывает скролл бар что бы не было дергания при открытия модального окна
-  overflow: auto;
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-  &::-webkit-scrollbar {
-    width: 0;
-    height: 0;
-  }
 }
 
 h1,
